@@ -9,7 +9,7 @@ const carritoComprar = document.querySelector("#carrito-comprar");
 const total = document.querySelector("#total");
 
 function subirLibrosAlCarrito() {
-    if(librosCarrito && librosCarrito.length > 0) {
+    if(librosCarrito.length > 0) {
         carritoVacio.classList.add("no-mostrar");
         contLibrosCarrito.classList.remove("no-mostrar");
         carritoBotones.classList.remove("no-mostrar");
@@ -92,3 +92,15 @@ function compraTotal() {
     total.innerText = `$${calcularTotal}`;
 }
 
+carritoComprar.addEventListener("click", comprar);
+
+function comprar() {
+    Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Compra realizada",
+        showConfirmButton: false,
+        timer: 3000
+    });
+    vaciarElCarrito();
+}
