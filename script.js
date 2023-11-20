@@ -53,7 +53,6 @@ function cargarLibros(productosElegidos) {
             <button class="agregar-carrito" id="${libro.id}">AGREGAR AL CARRITO</button>
         </div>
         `;
-        
         contenedorLibros.append(div);
     });
     
@@ -124,9 +123,8 @@ const librosMasVendidos = async () => {
             <button class="agregar-carrito" id="${libro.id}">AGREGAR AL CARRITO</button>
         </div>
         `;
-
         masVendidos.append(divMasVendidos);
     });
-    newBtnAgregarCarrito(); 
+    newBtnAgregarCarrito();
 }
 librosMasVendidos();
