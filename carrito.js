@@ -45,11 +45,10 @@ function subirLibrosAlCarrito() {
     }
     newBtnEliminarCarrito();
     compraTotal();
-    
+
 } 
 
 subirLibrosAlCarrito();
-
 
 function newBtnEliminarCarrito() {
     eliminarLibro = document.querySelectorAll(".carrito-eliminar");
@@ -60,12 +59,12 @@ function newBtnEliminarCarrito() {
 
 contLibrosCarrito.addEventListener("click", (e) => {
     if (e.target.classList.contains("carrito-eliminar")) {
-        eliminarLibroDelCarrito(e);
+        eliminarProducto(e);
     }
 });
 
 function eliminarLibroDelCarrito(e) {
-    const idBtn = e.currentTarget.id; 
+    const idBtn = e.currentTarget.id;
     const indice = librosCarrito.findIndex(libro => libro.id == idBtn);
     if (indice !== -1) {
         librosCarrito.splice(indice, 1);
@@ -80,11 +79,11 @@ function vaciarElCarrito() {
     librosCarrito.length = 0;
     localStorage.setItem("libros-carrito", JSON.stringify(librosCarrito));
     subirLibrosAlCarrito();
-    newBtnEliminarCarrito()
+    newBtnEliminarCarrito();
 }
 
 function compraTotal() {
-    const calcularTotal = librosCarrito.reduce((i, libro) => i + (libro.precio * libro.cantidad), 0);
+    const calcularTotal = librosCarrito.reduce((acumulador, libro) => acumulador + (libro.precio * libro.cantidad), 0);
     total.innerText = `$${calcularTotal}`;
 }
 

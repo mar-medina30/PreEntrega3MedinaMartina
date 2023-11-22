@@ -22,12 +22,13 @@ const libros = [
     {id: 24, nombre: "Saga Asesino de Brujas", imagen: "images/sagaA.jpg", categoría: {id:"sagas"}, genero: "fantasia", autor: "Shelby Mahurin", precio: 24000},
 ]
 
+
 const contenedorLibros = document.querySelector("#contenedor-libros");
 const filtrarLibros = document.querySelector("#filtrar-libros");
 const btnCategorias = document.querySelectorAll(".btn-categoria");
 let tituloCategoria = document.querySelector("#titulo-categoria");
 let btnAgregarCarrito = document.querySelectorAll(".agregar-carrito");
-const masVendidos = document.querySelector("#libros-mas-vendidos")
+const masVendidos = document.querySelector("#libros-mas-vendidos");
 
 
 function newBtnAgregarCarrito() {
@@ -61,6 +62,13 @@ function cargarLibros(productosElegidos) {
 
 cargarLibros(libros);
 
+let librosCarrito;
+let carrito = localStorage.getItem("libros-carrito");
+
+carrito 
+? librosCarrito = JSON.parse(carrito)
+: librosCarrito = [];
+
 btnCategorias.forEach(btn => {
     btn.addEventListener("click", (e) => {
 
@@ -75,13 +83,6 @@ btnCategorias.forEach(btn => {
         }
     });
 });
-
-let librosCarrito;
-let librosCarritoLocalStorage = localStorage.getItem("libros-carrito");
-
-librosCarritoLocalStorage 
-? librosCarrito = JSON.parse(librosCarritoLocalStorage)
-: librosCarrito = [];
 
 function agregarCarrito(e) {
     const idLibro = e.currentTarget.id;
@@ -120,11 +121,17 @@ const librosMasVendidos = async () => {
             <h3 class="libro-titulo">${libro.nombre}</h3>
             <p>Autor/a: ${libro.autor}</p>
             <p>$${libro.precio}</p>
-            <button class="agregar-carrito" id="${libro.id}">AGREGAR AL CARRITO</button>
+            <button class="agregar-carrito" id="boton${libro.id}">AGREGAR AL CARRITO</button>
         </div>
         `;
         masVendidos.append(divMasVendidos);
     });
+
+    btnAgregarCarrito = document.querySelectorAll(".agregar-carrito");
+    btnAgregarCarrito.forEach(btn => {
+        btn.addEventListener("click", agregarCarrito)
+    });
+
     newBtnAgregarCarrito();
 }
 librosMasVendidos();
